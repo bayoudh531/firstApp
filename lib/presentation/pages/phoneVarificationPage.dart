@@ -1,10 +1,15 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/presentation/bloc/phoneAuth/phoneAuthCubit.dart';
 import 'package:flutter_application_2/presentation/pages/setInitialProfilePage.dart';
 import 'package:flutter_application_2/presentation/widgets/theme/style.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PhoneVerifierPage extends StatefulWidget {
+  final String phoneNumber;
+
+  const PhoneVerifierPage({Key key, this.phoneNumber}) : super(key: key);
   @override
   _PhoneVerifierPage createState()=>_PhoneVerifierPage();
   
@@ -12,6 +17,7 @@ class PhoneVerifierPage extends StatefulWidget {
 
 class _PhoneVerifierPage extends State<PhoneVerifierPage>{
   TextEditingController _pinCodeController=TextEditingController();
+   String get phoneNumber => widget.phoneNumber;
   @override
   Widget build(BuildContext context) {
      return Scaffold(
@@ -91,11 +97,10 @@ child: Column(
 ),
     );
   }
-@override
-  void dispose() {
-      _pinCodeController.dispose();
-      super.dispose();
+  void submitSmsCode(){
+    if (_pinCodeController.text.isNotEmpty){
+      BlocProvider.of<PhoneAuthCubit>(context)
+          .submitSmsCode(smsCode: _pinCodeController.text);
     }
-
-
+  }
 }

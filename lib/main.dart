@@ -1,32 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/presentation/screens/splashScreen.dart';
+import 'package:flutter_application_2/presentation/bloc/auth/authCubit.dart';
+import 'package:flutter_application_2/presentation/bloc/auth/authState.dart';
+import 'package:flutter_application_2/presentation/bloc/phoneAuth/phoneAuthCubit.dart';
 import 'package:flutter_application_2/presentation/widgets/theme/style.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'injectionContainer.dart' as di;
+import 'package:firebase_core/firebase_core.dart';
+import 'presentation/screens/WelcomeScreen.dart';
+import 'presentation/screens/homeScreen.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await di.init();
   runApp(MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => di.sl<AuthCubit>()..appStarted(),
+       ),
+        BlocProvider(
+          create: (_) => di.sl<PhoneAuthCubit>(),
+        ),
+    ],
+   child :MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primaryColor: primaryColor,
+      primaryColor: primaryColor,
       ),
-      home:SplashScreen() ,
+     routes: {
+      "/": (context) {
+      return BlocBuilder<AuthCubit, AuthState>(
+       builder: (context, authState) {
+      if (authState is Authenticated) {
+      return HomeScreen(uid:authState.uid);
+      }
+     if (authState is UnAuthenticated) {
+       return WelcomeScreen();
+        }
+      return Container();
+        },
+        );
+      }
+        },
+      
+    ),
+   
     );
+    
+    
   }
 }
 

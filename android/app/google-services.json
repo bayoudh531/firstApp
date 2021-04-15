@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "65779435387",
+    "project_id": "whatshapp-b3d4a",
+    "storage_bucket": "whatshapp-b3d4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65779435387:android:1b9b42dc01a311be3cdfde",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "65779435387-kghjmshs90erut123do23r4o2bc43161.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSyKuPmmWSL9usgZzKjUr9KDWaNMgsspo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "65779435387-kghjmshs90erut123do23r4o2bc43161.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,15 @@
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/presentation/screens/homeScreen.dart';
+import 'package:flutter_application_2/presentation/bloc/phoneAuth/phoneAuthCubit.dart';
 import 'package:flutter_application_2/presentation/widgets/theme/style.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SetInitialProfilPage extends StatefulWidget {
+
+  final String phoneNumber;
+
+  const SetInitialProfilPage({Key key, this.phoneNumber}) : super(key: key);
   @override
   _SetInitialProfilPage createState()=> _SetInitialProfilPage();
    
@@ -11,8 +18,8 @@ class SetInitialProfilPage extends StatefulWidget {
 
 class _SetInitialProfilPage extends State<SetInitialProfilPage> {
   TextEditingController _nameController=TextEditingController();
+  String get phoneNumber => widget.phoneNumber;
   @override
- 
   Widget build(BuildContext context) {
   
     return Scaffold(
@@ -57,7 +64,7 @@ height: 30,
       child:MaterialButton(
       color:  greenColor,
       onPressed: (){
-       Navigator.push(context,MaterialPageRoute(builder:(_)=>HomeScreen())); 
+       submitProfileInfo();
       },
       child: Text("Next",style: TextStyle(fontSize: 20,color: Colors.white),
       ),
@@ -108,10 +115,17 @@ decoration: BoxDecoration(
 ),
   child: Icon(Icons.insert_emoticon),
   ),
-  
   ],
 ),
     );
+  }
+  void submitProfileInfo() {
+    if (_nameController.text.isNotEmpty) {
+      BlocProvider.of<PhoneAuthCubit>(context).submitProfileInfo(
+          profileUrl: "",
+          phoneNumber: phoneNumber,
+          name: _nameController.text);
+    }
   }
 @override
   void dispose() {

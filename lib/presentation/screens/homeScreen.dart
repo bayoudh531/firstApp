@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/presentation/pages/appel.dart';
-import 'package:flutter_application_2/presentation/pages/cameraPage.dart';
 import 'package:flutter_application_2/presentation/pages/message.dart';
 import 'package:flutter_application_2/presentation/pages/statusPage.dart';
 import 'package:flutter_application_2/presentation/widgets/customTabBar.dart';
 import 'package:flutter_application_2/presentation/widgets/theme/style.dart';
 
 class HomeScreen extends StatefulWidget {
+   final String uid;
+
+  const HomeScreen({Key key, this.uid}) : super(key: key);
+  
   @override
   _HomeScreen createState()=>_HomeScreen();
   
@@ -18,7 +21,7 @@ class _HomeScreen extends State<HomeScreen>{
    int indexPages=1;
   PageController _pageviewController=PageController(initialPage:1);
   List<Widget> _pages= [
-  CameraPage(),
+  
   Message(),
   StatusPage(),
   Apelle(),
@@ -104,8 +107,4 @@ return _pages[index];
 
 }
 
-class CallsPage {
-}
 
-class ChatPage {
-}

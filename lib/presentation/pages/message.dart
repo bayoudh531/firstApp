@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/presentation/pages/subPages/singleItemChatPageUser.dart';
 
 class Message extends StatelessWidget {
   // This widget is the root of your application.
@@ -6,9 +7,20 @@ class Message extends StatelessWidget {
   Widget build(BuildContext context){
 
 return Scaffold(
-  body: Center(child: Text("Message Page"),
+  body: Column(
+children: <Widget>[
+  Expanded(
+    child: ListView.builder(
+      itemCount: 10,
+      itemBuilder: (_,index){return SingleItemChatUserPage();
+      },
+      )
+    )
+],
   ),
-);
+
+  );
+
 
 }
 }

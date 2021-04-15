@@ -11,10 +11,6 @@ height: 50,
 decoration: BoxDecoration(color: primaryColor),
 child: Row(
   children: <Widget>[
-    Container(
-width: 40,
-child: Icon(Icons.camera_alt,color: Colors.white,),
-    ),
     Expanded(
       child: CustomTabBarButton(
         text: "CHATS",
